@@ -12,7 +12,7 @@ class Solution:
 
         for word in sorted(words, key=len):
             for index in range(len(word)):
-                predecessor = word[:index] + word[index + 1:]
+                predecessor = word[:index] + word[index + 1 :]
 
                 if predecessor in word_chain_lengths:
                     word_chain_lengths[word] = max(
