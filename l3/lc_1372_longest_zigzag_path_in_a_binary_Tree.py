@@ -17,11 +17,14 @@ class Solution:
         return max_length[0]
 
     def dfs(self, node, go_left, steps, max_length):
-        if node:
-            max_length[0] = max(max_length[0], steps)
-            if go_left:
-                self.dfs(node.left, False, steps + 1, max_length)
-                self.dfs(node.right, True, 1, max_length)
-            else:
-                self.dfs(node.left, False, 1, max_length)
-                self.dfs(node.right, True, steps + 1, max_length)
+        if not node:
+            return
+
+        max_length[0] = max(max_length[0], steps)
+        if go_left:
+            self.dfs(node.left, False, steps + 1, max_length)
+            self.dfs(node.right, True, 1, max_length)
+            return
+
+        self.dfs(node.left, False, 1, max_length)
+        self.dfs(node.right, True, steps + 1, max_length)
