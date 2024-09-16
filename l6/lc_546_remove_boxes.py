@@ -39,21 +39,21 @@ class SolutionBottomUp:
         n = len(boxes)
         dp = [[[0] * n for _ in range(n)] for _ in range(n)]
 
-        for j in range(n):
-            for k in range(j + 1):
-                dp[j][j][k] = (k + 1) * (k + 1)
+        for end in range(n):
+            for same_count in range(end + 1):
+                dp[end][end][same_count] = (same_count + 1) * (same_count + 1)
 
-        for l in range(1, n):
-            for j in range(l, n):
-                i = j - l
+        for length in range(1, n):
+            for end in range(length, n):
+                start = end - length
 
-                for k in range(i + 1):
-                    res = (k + 1) * (k + 1) + dp[i + 1][j][0]
+                for same_count in range(start + 1):
+                    max_score = (same_count + 1) * (same_count + 1) + dp[start + 1][end][0]
 
-                    for m in range(i + 1, j + 1):
-                        if boxes[m] == boxes[i]:
-                            res = max(res, dp[i + 1][m - 1][0] + dp[m][j][k + 1])
+                    for mid in range(start + 1, end + 1):
+                        if boxes[mid] == boxes[start]:
+                            max_score = max(max_score, dp[start + 1][mid - 1][0] + dp[mid][end][same_count + 1])
 
-                    dp[i][j][k] = res
+                    dp[start][end][same_count] = max_score
 
         return dp[0][n - 1][0] if n > 0 else 0
