@@ -56,4 +56,4 @@ class SolutionBottomUp:
 
                     dp[start][end][same_count] = max_score
 
-        return dp[0][n - 1][0] if n > 0 else 0
+        return dp[0][n - 1][0]
