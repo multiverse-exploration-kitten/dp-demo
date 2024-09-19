@@ -48,11 +48,17 @@ class SolutionBottomUp:
                 start = end - length
 
                 for same_count in range(start + 1):
-                    max_score = (same_count + 1) * (same_count + 1) + dp[start + 1][end][0]
+                    max_score = (same_count + 1) * (same_count + 1) + dp[start + 1][
+                        end
+                    ][0]
 
                     for mid in range(start + 1, end + 1):
                         if boxes[mid] == boxes[start]:
-                            max_score = max(max_score, dp[start + 1][mid - 1][0] + dp[mid][end][same_count + 1])
+                            max_score = max(
+                                max_score,
+                                dp[start + 1][mid - 1][0]
+                                + dp[mid][end][same_count + 1],
+                            )
 
                     dp[start][end][same_count] = max_score
 
