@@ -42,9 +42,8 @@ class Solution:
                             continue
                         # If the current letter matches the i-th character in target, mark it as matched
                         if c == letter:
-                            now |= (
-                                1 << i
-                            )  # Use bitmask to mark the i-th character as completed
+                            # Use bitmask to mark the i-th character as completed
+                            now |= (1 << i)
                             break
 
                 # Update dp for the new state 'now'
@@ -52,6 +51,5 @@ class Solution:
                     dp[now] = dp[state] + 1
 
         # Return the minimum stickers needed to match all characters in target
-        return dp[
-            -1
-        ]  # The last state (all bits set) represents the full target matched
+        # The last state (all bits set) represents the full target matched
+        return dp[-1]
