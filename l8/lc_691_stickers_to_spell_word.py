@@ -10,16 +10,16 @@ class Solution:
 
         # Preprocess stickers: Keep only the characters that are also in the target
         # This will help optimize the sticker selection later
-        A = [collections.Counter(sticker) & t_count for sticker in stickers]
+        sticker_counters = [collections.Counter(sticker) & t_count for sticker in stickers]
 
         # Remove redundant stickers
-        # If sticker A[i] is a subset of sticker A[j], we can discard A[i]
-        for i in range(len(A) - 1, -1, -1):
-            if any(A[i] == A[i] & A[j] for j in range(len(A)) if i != j):
-                A.pop(i)
+        # If sticker sticker_counters[i] is a subset of sticker sticker_counters[j], we can discard sticker_counters[i]
+        for i in range(len(sticker_counters) - 1, -1, -1):
+            if any(sticker_counters[i] == sticker_counters[i] & sticker_counters[j] for j in range(len(sticker_counters)) if i != j):
+                sticker_counters.pop(i)
 
         # Convert the list of sticker counters back to their string form
-        stickers = ["".join(s_count.elements()) for s_count in A]
+        stickers = ["".join(s_count.elements()) for s_count in sticker_counters]
 
         # dp[state] represents the minimum number of stickers needed to achieve a particular state
         # State is represented by a bitmask of length equal to the target string
